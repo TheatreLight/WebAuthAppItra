@@ -1,0 +1,98 @@
+﻿@model IEnumerable<WebAuthAppItra.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+@{
+    var i = 0;
+}
+<h1>Index</h1>
+
+<body>
+<form method="post">
+
+<p>
+            <button type="submit" asp-action="Block" name="BlockingButtons">Block</button>
+            <button type="submit" asp-action="Unblock" name="BlockingButtons">Unblock</button>
+            <button type="submit" asp-action="Remove" name="BlockingButtons">Remove</button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                <input type="checkbox" id="headCheck"/>
+                        <script>
+                            var x = document.getElementById('headCheck');
+                            var y = document.getElementsByClassName('checkbox');
+                            console.log(y);
+                            x.addEventListener('change', (event) => {                               
+                                    for (let item of y) {
+                                        item.toggleAttribute('value');
+                                        console.log(item);
+                                    }
+                            })
+                        </script>
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastLoginTime)
+            </th>
+            <th>
+                Status (is blocked)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <input type="checkbox" id="check" name="IsChecked[@i]" value="true" class="checkbox"/>
+                <input type="hidden" name="IsChecked[@i]" value="false" class="checkbox" />
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastLoginTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBlocked)
+            </td>
+        </tr>
+        <!---@(i++)--->
+}
+    </tbody>
+    
+</table>
+        
+    
+</form>
+</body>
+
+
